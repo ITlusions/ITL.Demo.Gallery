@@ -1,0 +1,28 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: demo-apps
+spec:
+  generators:
+    - git:
+        directories:
+          - path: apps/*
+        repoURL: https://github.com/ITlusions/ITL.Demo.Gallery.git
+        revision: main
+  template:
+    metadata:
+      name: "{{ .name | lower | replace "." "-" }}"
+    spec:
+      destination:
+        namespace: "{{ .name | lower | replace "." "-" }}"
+        server: https://kubernetes.default.svc
+      project: default
+      source:
+        repoURL: "{{ .repoURL }}"
+        targetRevision: main
+        path: .
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

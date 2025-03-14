@@ -1,0 +1,7 @@
+
+apiVersion: v2
+name: submodule-apps
+description: A Helm chart for managing submodule-based applications
+type: application
+version: 0.1.0
+appVersion: "1.0"

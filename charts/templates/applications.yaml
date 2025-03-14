@@ -1,0 +1,21 @@
+
+{{- range .Values.submodules }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "{{ include "submodule.name" .name }}"
+spec:
+  destination:
+    namespace: "{{ include "submodule.name" .name }}"
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: "{{ .repoURL }}"
+    targetRevision: main
+    path: .
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+{{- end }}

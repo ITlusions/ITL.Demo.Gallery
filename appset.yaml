@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: demo-apps
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/ITlusions/ITL.Demo.Gallery.git
+      revision: main
+      directories:
+        - path: apps/*  # Scans submodules under the "apps/" directory
+  template:
+    metadata:
+      name: '{{path.basename | lower | replace "." "-" }}'  # Converts to lowercase and replaces dots with hyphens
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/ITlusions/{{path.basename}}.git'
+        targetRevision: main
+        path: .  # Assumes submodules contain manifests at the root
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename | lower | replace "." "-" }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
