@@ -2,3 +2,4 @@
 submodules:
   - name: "ITL.DDns.Dashboard"
     repoURL: "https://github.com/ITlusions/ITL.DDns.Dashboard.git"
+    namespace: "itl-ddns-dashboard"
