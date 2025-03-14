@@ -11,10 +11,10 @@ spec:
         revision: main
   template:
     metadata:
-      name: "{{ .name | lower | replace \".\" \"-\" }}"
+      name: "{{ .name | lower | replace "." "-" }}"
     spec:
       destination:
-        namespace: "{{ .name | lower | replace \".\" \"-\" }}"
+        namespace: "{{ .name | lower | replace replace "." "-" }}"
         server: https://kubernetes.default.svc
       project: default
       source:
