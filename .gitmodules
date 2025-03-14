@@ -1,0 +1,3 @@
+[submodule "apps/ITL.DDns.Dashboard"]
+	path = apps/ITL.DDns.Dashboard
+	url = https://github.com/ITlusions/ITL.DDns.Dashboard.git
