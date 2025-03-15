@@ -10,18 +10,21 @@ spec:
         repoURL: https://github.com/ITlusions/ITL.Demo.Gallery.git
         revision: main
   template:
+    # Loop over each submodule in the values file
+    {{- range .Values.submodules }}
     metadata:
-      name: {{ values.submodules.namespace }}
+      name: '{{ .name | lower | replace \".\" \"-\" }}'
     spec:
       destination:
-        namespace: {{ values.submodules.namespace }}
+        namespace: '{{ .namespace | lower | replace \".\" \"-\" }}'
         server: https://kubernetes.default.svc
       project: default
       source:
-        repoURL: {{ values.submodules.repoURL }}
+        repoURL: "{{ .repoURL }}"
         targetRevision: main
         path: .
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
+    {{- end }}
