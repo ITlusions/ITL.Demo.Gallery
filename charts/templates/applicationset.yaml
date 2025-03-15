@@ -13,10 +13,10 @@ spec:
     # Loop over each submodule in the values file
     {{- range .Values.submodules }}
     metadata:
-      name: '{{ .name | lower | replace \".\" \"-\" }}'
+      name: "{{ .namespace }}"
     spec:
       destination:
-        namespace: '{{ .namespace | lower | replace \".\" \"-\" }}'
+        namespace: "{{ .namespace }}"
         server: https://kubernetes.default.svc
       project: default
       source:
