@@ -4,10 +4,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: "{{ include "submodule.name" .name }}"
+  name: "{{ include "submodule.name" .namespace }}"
 spec:
   destination:
-    namespace: "{{ include "submodule.name" .name }}"
+    namespace: "{{ include "submodule.name" .namespace }}"
     server: https://kubernetes.default.svc
   project: default
   source:
