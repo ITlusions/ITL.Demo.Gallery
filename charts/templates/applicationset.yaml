@@ -11,14 +11,14 @@ spec:
         revision: main
   template:
     metadata:
-      name: {{ .namespace }}
+      name: {{ values.submodules.namespace }}
     spec:
       destination:
-        namespace: {{ .namespace }}
+        namespace: {{ values.submodules.namespace }}
         server: https://kubernetes.default.svc
       project: default
       source:
-        repoURL: {{ .repoURL }}
+        repoURL: {{ values.submodules.repoURL }}
         targetRevision: main
         path: .
       syncPolicy:
